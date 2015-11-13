@@ -1,0 +1,11 @@
+# This file is managed by Ansible, all changes will be lost.
+Name={{ item.name }}
+Device=/dev/net/tun
+Mode=switch
+{% for server in tinc_vpn %}
+{% if item.vpn == server.vpn and item.name != server.name %}
+ConnectTo={{ server.name }}
+{% endif %}
+{% endfor %}
+Cipher={{ tinc_cipher }}
+Digest={{ tinc_digest }}

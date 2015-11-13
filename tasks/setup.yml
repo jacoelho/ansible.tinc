@@ -12,6 +12,43 @@
   become_method: sudo
   notify: restart tinc
 
+- name: tinc | configure nets.boot
+  template:
+    src: "nets.boot.j2"
+    dest: "/etc/tinc/nets.boot"
+    mode: 0600
+    owner: root
+    group: root
+  become: yes
+  become_method: sudo
+  notify: restart tinc
+
+- name: tinc | copy rsa_key
+  copy:
+    dest: "/etc/tinc/{{ item.vpn }}/rsa_key.priv"
+    content: "{{ tinc_rsa_key }}"
+    mode: 0600
+    owner: root
+    group: root
+  with_items: tinc_vpn
+  when: tinc_hostname == item.name
+  become: yes
+  become_method: sudo
+  notify: restart tinc
+
+- name: tinc | copy tinc.conf
+  template:
+    src: "tinc.conf.j2"
+    dest: "/etc/tinc/{{ item.vpn }}/tinc.conf"
+    mode: 0600
+    owner: root
+    group: root
+  with_items: tinc_vpn
+  when: tinc_hostname == item.name
+  become: yes
+  become_method: sudo
+  notify: restart tinc
+
 - name: tinc | configure hosts
   template:
     src: "host.j2"
@@ -24,7 +61,7 @@
   become_method: sudo
   notify: restart tinc
 
-- name: tinc | configure scripts
+- name: tinc | configure tinc-up
   template:
     src: "tinc-up.j2"
     dest: "/etc/tinc/{{ item.vpn }}/tinc-up"
@@ -36,3 +73,18 @@
   become: yes
   become_method: sudo
   notify: restart tinc
+
+- name: tinc | configure tinc-down
+  copy:
+    src: "tinc-down"
+    dest: "/etc/tinc/{{ item.vpn }}/tinc-down"
+    owner: root
+    group: root
+    mode: 0755
+  with_items: tinc_vpn
+  when: tinc_hostname == item.name
+  become: yes
+  become_method: sudo
+  notify: restart tinc
+
+- meta: flush_handlers
