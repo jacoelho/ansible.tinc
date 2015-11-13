@@ -10,6 +10,7 @@
   with_items: tinc_vpn
   become: yes
   become_method: sudo
+  notify: restart tinc
 
 - name: tinc | configure hosts
   template:
@@ -21,6 +22,7 @@
   with_items: tinc_vpn
   become: yes
   become_method: sudo
+  notify: restart tinc
 
 - name: tinc | configure scripts
   template:
@@ -33,3 +35,4 @@
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
+  notify: restart tinc
