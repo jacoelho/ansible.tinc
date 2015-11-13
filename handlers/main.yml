@@ -1,0 +1,8 @@
+---
+
+- name: restart tinc
+  service:
+    name: tinc
+    state: "restarted"
+  become: yes
+  become_method: sudo

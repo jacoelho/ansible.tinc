@@ -1,0 +1,4 @@
+#!/bin/sh
+{% set ipv4_host = item.address | ipv4('host/prefix') %}
+ifconfig $INTERFACE {{ ipv4_host | ipaddr('address') }} netmask {{ ipv4_host | ipaddr('netmask') }} up
+route add -net {{ ipv4_host | ipaddr('network') }} netmask {{ ipv4_host | ipaddr('netmask') }} gw {{ ipv4_host | ipaddr('address') }} dev $INTERFACE

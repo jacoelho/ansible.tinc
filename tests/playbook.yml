@@ -1,0 +1,7 @@
+---
+
+- name: testing
+  hosts: all
+
+  roles:
+    - role: ansible.tinc

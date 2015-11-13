@@ -1,0 +1,14 @@
+---
+
+galaxy_info:
+  author: Jose Coelho
+  description: configure tinc
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  galaxy_tags:
+    - system
+dependencies: []

@@ -1,0 +1,35 @@
+---
+
+- name: tinc | create directories
+  file:
+    path: "/etc/tinc/{{ item.vpn }}/hosts"
+    owner: root
+    group: root
+    state: directory
+    recurse: true
+  with_items: tinc_vpn
+  become: yes
+  become_method: sudo
+
+- name: tinc | configure hosts
+  template:
+    src: "host.j2"
+    dest: "/etc/tinc/{{ item.vpn }}/{{ item.name }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items: tinc_vpn
+  become: yes
+  become_method: sudo
+
+- name: tinc | configure scripts
+  template:
+    src: "tinc-up.j2"
+    dest: "/etc/tinc/{{ item.vpn }}/tinc-up"
+    owner: root
+    group: root
+    mode: 0755
+  with_items: tinc_vpn
+  when: tinc_hostname == item.name
+  become: yes
+  become_method: sudo
