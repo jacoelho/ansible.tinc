@@ -1,81 +1,16 @@
 ---
 
-tinc_hostname: redis3
+#tinc_hostname: redis3
 tinc_cipher: aes-256-cbc
 tinc_digest: SHA512
 
-tinc_rsa_key: |
-  -----BEGIN RSA PRIVATE KEY-----
-  MIIEowIBAAKCAQEApSZZyhTibBYiZnF6R+dCgr4p8eZ1QcLJVUy9CX+7gqpZZHoM
-  5v/A8v8ba2U28M/+vOE7ByKc7jAebXPkpw3VXsQfpfpJQSbrVQ1FyhwE63zLHkT7
-  Xxww+XItduqwK9aQ3KVP/7W2KpppcXHQhNmbQCShALNRBbMUu0MMuBCPIVmq1q3W
-  hdW1BYQYzfaG6uHJyXkNk0ZzffQ7vIn1x4PFAW6QoduR0wpELM6auEJAJUqwOHa+
-  OwlfHeZkmxrrAYwTqmIAQZoBjNXzXao/XYs8YBWCRdoY2fQpgjZCyE2O8VNtECsk
-  XoUkm5sqth71au95Vu2ph3nEZMkk/4sRkpnqwwIDAQABAoIBAQCSgI/cZWRqj8Qa
-  boYULQFibAFXlqHkIUBrC/UR7R7RDf7Y1DCH5s8qgMW5IoN3YnvO4Fp1vO3LmiIT
-  5GAtFWd3drHAkmPTiQvwWiLT5ME0iXLCOl1nhOGpFvFf8VcwvFmrcnaiF3cvGeV5
-  /oYEo+lGIHg239t7G97DM/qfegkOgkjX4k9gZgKiRDLr7DgZU2qItu1qWW0QtylZ
-  O5hLqyqIAGMBk3ma/Q/NrxIpBqw1/qtpDBHD1DykwCHAF4jEmtObbz1X+tWMLN3b
-  qhUX+8EC1VAkTyIcqBbw7FNfF0JZ3eF+jP8oCg5XI0Ct+h6wOQ9r3fLprCN0cYI8
-  C0zgHQZxAoGBANIWOxUJYe9FXzWHxjTI6JbhYeffxBMdJwWOnnm49gu/QO9wlPbH
-  TkrzfRws6WJSzpzgqa3cCkH5glIIal82o2d/GXjH59sxxZb5pc0Rz65ZenqbbGh6
-  LgnBr8g0CrVhfGF/WxPquD43+Smm0j0UJnsc67fT00EqEV1fSMYj5JN7AoGBAMk+
-  BOT5b7igko/vXvB/kLT8k86Fid+mFETWJtXpS2K8SyDBJ4543FAd/c78LQ08KGVn
-  5LBgqTgc7HqG/RK/RcJiDsr7mX4vjDppaotpmNxI4k7JXZD4VTxtSEwXODoXrMIA
-  LmG+QsSuLNyLu0uNO/MYWvErrYkUM5rGaFg/uF9ZAoGAGXf6d6VoiwJE9Y9dNv74
-  O3pdTSfydEK/fUv56FXE9k2cSKrEVFp7Ilj8XNMRBAt34srVpy8ayz69TsaYZqyQ
-  CLb+1oadlBQnmRLwx7iWDdPpJj37WXseY65oagPtHGoSExvGZda5uUk92o/PwvnT
-  ZG9wIBv861R3QHORtfuZ9UsCgYAURDKp/JTLuyAHbsvY3H/uOiGIgtpHs6oG5Ko0
-  kLIO13eZbNpW9sT5LIwK9Ep1MsG+tJ/LQ3DHPeJy1HVYFfsogEeNGZlzo8Yze7pH
-  H/NM++oOlSjfGKM82qSVRSFceFXlk68YGNkQhZnu/AN4sFiBOsqtzwBC9c3coG6R
-  tJkUwQKBgEYre+DaI9KTK5qV2h1Ts1NN6eRD5M5N7iGY3aSaBLglTXU1DXAjaN2x
-  8M1+l1d9OtuT/WJWDRBqlQTMDkyMrMjQa6D6PbxFefdrX6STXDYKdmUasKH0H9W6
-  bEcwiw6Rhhci9vOLeCI7QqhquKnsnzeYeQ3TOxGfJacAKP8njsXs
-  -----END RSA PRIVATE KEY-----
+#tinc_rsa_key:
 
-tinc_vpn:
-  - vpn: redis
-    name: redis1
-    bind: 192.168.205.10
-    port: 655
-    compression: 0
-    address: 172.10.10.10/24
-    public_key: |
-      -----BEGIN RSA PUBLIC KEY-----
-      MIIBCgKCAQEApSZZyhTibBYiZnF6R+dCgr4p8eZ1QcLJVUy9CX+7gqpZZHoM5v/A
-      8v8ba2U28M/+vOE7ByKc7jAebXPkpw3VXsQfpfpJQSbrVQ1FyhwE63zLHkT7Xxww
-      +XItduqwK9aQ3KVP/7W2KpppcXHQhNmbQCShALNRBbMUu0MMuBCPIVmq1q3WhdW1
-      BYQYzfaG6uHJyXkNk0ZzffQ7vIn1x4PFAW6QoduR0wpELM6auEJAJUqwOHa+Owlf
-      HeZkmxrrAYwTqmIAQZoBjNXzXao/XYs8YBWCRdoY2fQpgjZCyE2O8VNtECskXoUk
-      m5sqth71au95Vu2ph3nEZMkk/4sRkpnqwwIDAQAB
-      -----END RSA PUBLIC KEY-----
-  - vpn: redis
-    name: redis2
-    bind: 192.168.205.11
-    port: 655
-    compression: 0
-    address: 172.10.10.11/24
-    public_key: |
-      -----BEGIN RSA PUBLIC KEY-----
-      MIIBCgKCAQEApSZZyhTibBYiZnF6R+dCgr4p8eZ1QcLJVUy9CX+7gqpZZHoM5v/A
-      8v8ba2U28M/+vOE7ByKc7jAebXPkpw3VXsQfpfpJQSbrVQ1FyhwE63zLHkT7Xxww
-      +XItduqwK9aQ3KVP/7W2KpppcXHQhNmbQCShALNRBbMUu0MMuBCPIVmq1q3WhdW1
-      BYQYzfaG6uHJyXkNk0ZzffQ7vIn1x4PFAW6QoduR0wpELM6auEJAJUqwOHa+Owlf
-      HeZkmxrrAYwTqmIAQZoBjNXzXao/XYs8YBWCRdoY2fQpgjZCyE2O8VNtECskXoUk
-      m5sqth71au95Vu2ph3nEZMkk/4sRkpnqwwIDAQAB
-      -----END RSA PUBLIC KEY-----
-  - vpn: redis
-    name: redis3
-    bind: 192.168.205.12
-    port: 655
-    compression: 0
-    address: 172.10.10.12/24
-    public_key: |
-      -----BEGIN RSA PUBLIC KEY-----
-      MIIBCgKCAQEApSZZyhTibBYiZnF6R+dCgr4p8eZ1QcLJVUy9CX+7gqpZZHoM5v/A
-      8v8ba2U28M/+vOE7ByKc7jAebXPkpw3VXsQfpfpJQSbrVQ1FyhwE63zLHkT7Xxww
-      +XItduqwK9aQ3KVP/7W2KpppcXHQhNmbQCShALNRBbMUu0MMuBCPIVmq1q3WhdW1
-      BYQYzfaG6uHJyXkNk0ZzffQ7vIn1x4PFAW6QoduR0wpELM6auEJAJUqwOHa+Owlf
-      HeZkmxrrAYwTqmIAQZoBjNXzXao/XYs8YBWCRdoY2fQpgjZCyE2O8VNtECskXoUk
-      m5sqth71au95Vu2ph3nEZMkk/4sRkpnqwwIDAQAB
-      -----END RSA PUBLIC KEY-----
+#tinc_vpn:
+#  - vpn: <vpn name>
+#    name: <host name will be used also to match tic_hostname>
+#    bind: <local ip where tinc should listen>
+#    port: 655
+#    compression: 0
+#    address: <tun ip address, for vpn access>
+#    public_key: |
