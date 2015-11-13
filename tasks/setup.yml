@@ -1,5 +1,16 @@
 ---
 
+- name: tinc | configure nets.boot
+  template:
+    src: "nets.boot.j2"
+    dest: "/etc/tinc/nets.boot"
+    mode: 0600
+    owner: root
+    group: root
+  become: yes
+  become_method: sudo
+  notify: restart tinc
+
 - name: tinc | create directories
   file:
     path: "/etc/tinc/{{ item.vpn }}/hosts"
@@ -8,17 +19,6 @@
     state: directory
     recurse: true
   with_items: tinc_vpn
-  become: yes
-  become_method: sudo
-  notify: restart tinc
-
-- name: tinc | configure nets.boot
-  template:
-    src: "nets.boot.j2"
-    dest: "/etc/tinc/nets.boot"
-    mode: 0600
-    owner: root
-    group: root
   become: yes
   become_method: sudo
   notify: restart tinc
@@ -52,7 +52,7 @@
 - name: tinc | configure hosts
   template:
     src: "host.j2"
-    dest: "/etc/tinc/{{ item.vpn }}/{{ item.name }}"
+    dest: "/etc/tinc/{{ item.vpn }}/hosts/{{ item.name }}"
     owner: root
     group: root
     mode: 0644

@@ -1,5 +1,5 @@
 # This file is managed by Ansible, all changes will be lost.
-{% set vpn_list = tinc_vpn|map(attribute='vpn')|list %}
+{% set vpn_list = tinc_vpn|map(attribute='vpn')|list|unique %}
 {% for vpn in vpn_list %}
 {{ vpn }}
 {% endfor %}
