@@ -4,6 +4,6 @@ Name={{ item.name }}
 Address={{ item.address }}
 Port={{ item.port | default('655') }}
 Compression={{ item.compression | default('0') }}
-Subnet={{ item.subnet }}
+Subnet={{ ipv4_host | ipaddr('address') }}/32
 
 {{ item.public_key }}
