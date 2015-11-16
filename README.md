@@ -21,23 +21,19 @@ With this information set ```tinc_rsa_key```
 In order to setup a simple point to point vpn:
 
 common variables:
-  
+
     tinc_vpn:
-      - vpn: test #vpn name 
-        name: host1  
-        bind: 192.168.205.10 #local adddress 
-        port: 655
-        compression: 0
-        address: 172.10.10.10/24 # ip address to use in the vpn interface
+      - vpn: test #vpn name
+        name: host1
+        address: 192.168.205.10 #local adddress
+        subnet: 172.10.10.10/24 # ip address to use in the vpn interface
         public_key: |
           -----BEGIN RSA PUBLIC KEY-----
           -----END RSA PUBLIC KEY-----
       - vpn: test
-        name: host2 
-        bind: 192.168.205.11
-        port: 655
-        compression: 0
-        address: 172.10.10.11/24
+        name: host2
+        address: 192.168.205.11
+        subnet: 172.10.10.11/24
         public_key: |
           -----BEGIN RSA PUBLIC KEY-----
           -----END RSA PUBLIC KEY-----
@@ -45,10 +41,16 @@ common variables:
 host1:
 
     tinc_hostname: host1
+    tinc_rsa_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      -----END RSA PRIVATE KEY-----
 
 host2:
 
     tinc_hostname: host1
+    tinc_rsa_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      -----END RSA PRIVATE KEY-----
 
 Dependencies
 ------------
