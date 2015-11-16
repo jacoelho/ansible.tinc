@@ -1,0 +1,52 @@
+---
+
+- name: tinc | check if tinc_hostname is defined
+  assert:
+    that: tinc_hostname is defined and tinc_hostname|length > 0
+
+- name: tinc | check if tinc_rsa_key is defined
+  assert:
+    that: tinc_rsa_key is defined and tinc_rsa_key|length > 0
+
+- name: tinc | check tinc_vpn is defined
+  assert:
+    that: tinc_vpn is defined and tinc_vpn|length > 0
+
+- name: tinc | check tinc_vpn list if vpn is defined
+  assert:
+    that:
+      - item.vpn is defined and item.vpn|length > 0
+  with_items: tinc_vpn
+
+- name: tinc | check tinc_vpn list if name is defined
+  assert:
+    that:
+      - item.name is defined and item.name|length > 0
+  with_items: tinc_vpn
+
+- name: tinc | check tinc_vpn list if address is defined
+  assert:
+    that:
+      - item.address is defined and item.address|length > 0
+      - item.address | ipaddr
+  with_items: tinc_vpn
+
+- name: tinc | check tinc_vpn list if subnet is defined and well formed
+  assert:
+    that:
+      - item.subnet is defined and item.subnet|length > 0
+      - item.subnet | ipaddr
+      - item.subnet | ipv4('host/prefix') | ipaddr('address')
+      - item.subnet | ipv4('host/prefix') | ipaddr('network')
+      - item.subnet | ipv4('host/prefix') | ipaddr('netmask')
+  with_items: tinc_vpn
+
+- name: tinc | check tinc_vpn list if public_key is defined
+  assert:
+    that:
+      - item.public_key is defined and item.public_key|length > 0
+  with_items: tinc_vpn
+
+- name: tinc | check if tinc_hostname in tinc_vpn
+  assert:
+    that: tinc_hostname in (tinc_vpn|map(attribute='name')|list)

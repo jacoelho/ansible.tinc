@@ -1,6 +1,6 @@
 # This file is managed by Ansible, all changes will be lost.
 Name={{ item.name }}
-Device=/dev/net/tun
+Device=tun0
 Mode=switch
 {% for server in tinc_vpn %}
 {% if item.vpn == server.vpn and item.name != server.name %}

@@ -6,3 +6,8 @@
     state: "restarted"
   become: yes
   become_method: sudo
+
+- name: reload tinc
+  command: /usr/sbin/tincd --kill HUP
+  become: yes
+  become_method: sudo

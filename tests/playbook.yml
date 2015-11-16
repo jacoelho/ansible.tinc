@@ -3,5 +3,36 @@
 - name: testing
   hosts: all
 
+  vars:
+    tinc_hostname: test
+    tinc_rsa_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIICXwIBAAKBgQDQMMJGxNskQTBLbBXNXq8PcHEHdPhMwvgCYd897Q1zaJyE06sy
+      rt5HKt2I4NDdm+IxSZvHmskKxGG9X22aiaK4ojbVzzBY1/eBrmjxQKcvVXe5NIL2
+      inxZaN1aa2Z1rh1Jaf3vdc2ztKqNwAmK+jurQwlRI53935FChvImMdlhKQIDAQAB
+      AoGBAJjFHtrFe7V37JN75efE8hsXPKnnKIlTjKBa53FOsU8d1bUWigrwDQYWK2hU
+      6I+l4u6eACURrTMsdjh7fTcohnE4HRZIj8elP/jCD2XtJ93owdJoszB1sicWKvbN
+      UJ1LnoSLk0rlW4GfqaX89XnPwJPFQ/xTdsMgROkUDFcnAAcBAkEA+fBANeghHj1D
+      wydVFFE0K6rXx/5tpyFMoMSxYzY6YcWsKDuvupqsUFRDg4FVu6Dc/lB7jHWbVb3N
+      7+IbreXqoQJBANU9UIKhoY0nGMdOv3U/2MLcZEAbqSMM4RjvTzuVA2iDinGslLKG
+      j6/zx6otfvAzsnSRj8dxxJpcG0QtdMwmMYkCQQCOcRPHJSIqv7Ostu/QAm9/K4CK
+      pEAN7fZj8XU/G5quOh/hVhLSgHAP39YSTlVz9zu7XFbtN+FtPhztx6kKtGvBAkEA
+      tYJYiqlcY1M5Q0XjsMElGFETQIKLCRvIazogvn3MBeWaLcKSXBgwLLycY14QpBPN
+      Pm487a8Ig8ANMY5j0fZcyQJBAKD53PmCTkh+FeiPD1cnOOrwrRtxXE10uMxPmisO
+      4NokwyX9abvyHKfKM/7BMJE9C/7XUFXHd/9y/4zChc6uFjI=
+      -----END RSA PRIVATE KEY-----
+    tinc_vpn:
+      - vpn: test_vpn
+        name: test
+        address: "127.0.0.1"
+        subnet: "10.0.0.1/24"
+        public_key: |
+          -----BEGIN RSA PUBLIC KEY-----
+          MIGJAoGBANAwwkbE2yRBMEtsFc1erw9wcQd0+EzC+AJh3z3tDXNonITTqzKu3kcq
+          3Yjg0N2b4jFJm8eayQrEYb1fbZqJoriiNtXPMFjX94GuaPFApy9Vd7k0gvaKfFlo
+          3VprZnWuHUlp/e91zbO0qo3ACYr6O6tDCVEjnf3fkUKG8iYx2WEpAgMBAAE=
+          -----END RSA PUBLIC KEY-----
+
+
   roles:
     - role: ansible.tinc

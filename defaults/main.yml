@@ -9,8 +9,8 @@ tinc_digest: SHA512
 #tinc_vpn:
 #  - vpn: <vpn name>
 #    name: <host name will be used also to match tic_hostname>
-#    bind: <local ip where tinc should listen>
+#    address: <local ip where tinc should listen>
 #    port: 655
 #    compression: 0
-#    address: <tun ip address, for vpn access>
+#    subnet: <tun ip address, for vpn access>
 #    public_key: |

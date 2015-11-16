@@ -9,9 +9,9 @@
 }
 
 @test "tinc tinc.conf" {
-  [ -e "/etc/tinc/redis/tinc.conf" ]
+  [ -e "/etc/tinc/test_vpn/tinc.conf" ]
 }
 
 @test "tinc rsa_key.priv" {
-  [ -e "/etc/tinc/redis/rsa_key.priv" ]
+  [ -e "/etc/tinc/test_vpn/rsa_key.priv" ]
 }

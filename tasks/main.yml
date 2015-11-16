@@ -1,5 +1,7 @@
 ---
 
+- include: test.yml
+
 - include: apt.yml
 
 - include: setup.yml
