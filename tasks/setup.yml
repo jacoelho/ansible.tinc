@@ -59,7 +59,7 @@
   with_items: tinc_vpn
   become: yes
   become_method: sudo
-  notify: reload tinc
+  notify: restart tinc
 
 - name: tinc | configure tinc-up
   template:
