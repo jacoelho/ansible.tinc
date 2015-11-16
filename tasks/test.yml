@@ -24,6 +24,11 @@
       - item.name is defined and item.name|length > 0
   with_items: tinc_vpn
 
+- name: tinc | check tinc_vpn list if name is unique
+  assert:
+    that:
+      - tinc_vpn|map(attribute='name')|list|length == tinc_vpn|map(attribute='name')|list|unique|length
+
 - name: tinc | check tinc_vpn list if address is defined
   assert:
     that:

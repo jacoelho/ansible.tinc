@@ -33,6 +33,5 @@
           3VprZnWuHUlp/e91zbO0qo3ACYr6O6tDCVEjnf3fkUKG8iYx2WEpAgMBAAE=
           -----END RSA PUBLIC KEY-----
 
-
   roles:
     - role: ansible.tinc
