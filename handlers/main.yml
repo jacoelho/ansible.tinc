@@ -6,3 +6,10 @@
     state: "restarted"
   become: yes
   become_method: sudo
+
+- name: reload tinc
+  service:
+    name: tinc
+    state: "reloaded"
+  become: yes
+  become_method: sudo
