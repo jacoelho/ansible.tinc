@@ -18,9 +18,7 @@ Generate an tincd key:
 
 With this information set ```tinc_rsa_key```
 
-In order to setup a simple point to point vpn:
-
-common variables:
+In order to setup a simple point to point vpn, common variables:
 
     tinc_vpn:
       - vpn: test #vpn name
