@@ -3,7 +3,12 @@
 #tinc_hostname: redis3
 tinc_cipher: aes-256-cbc
 tinc_digest: SHA512
-
+tinc_init_system: '{{ "systemd"
+                   if (ansible_service_mgr|d() and
+                       ansible_service_mgr == "systemd")
+                   else "default" }}'
+tinc_restart: "restart tinc - {{ tinc_init_system }}"
+tinc_reload: "reload tinc - {{ tinc_init_system }}"
 #tinc_rsa_key:
 
 #tinc_vpn:

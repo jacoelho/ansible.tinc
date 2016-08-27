@@ -6,3 +6,4 @@
 
 - include: setup.yml
 
+- include: "init_{{ tinc_init_system }}.yml"

@@ -1,15 +1,36 @@
 ---
 
-- name: restart tinc
+# inclue of handlers is broken with Ansible 2.0.x, this is a work around
+# e.g: https://github.com/ansible/ansible/issues/13485
+
+# non-systemd
+- name: reload tinc - default
+  service:
+    name: tinc
+    state: "reloaded"
+  become: yes
+  become_method: sudo
+
+- name: restart tinc - default
   service:
     name: tinc
     state: "restarted"
   become: yes
   become_method: sudo
 
-- name: reload tinc
+# systemd
+- name: reload tinc - systemd
   service:
-    name: tinc
-    state: "reloaded"
+    name: "tinc@{{ item.vpn }}.service"
+    state: reloaded
+  with_items: tinc_vpn
+  become: yes
+  become_method: sudo
+
+- name: restart tinc - systemd
+  service:
+    name: "tinc@{{ item.vpn }}.service"
+    state: restarted
+  with_items: tinc_vpn
   become: yes
   become_method: sudo
