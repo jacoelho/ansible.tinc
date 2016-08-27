@@ -3,7 +3,7 @@ jacoelho.tinc
 
 An ansible role that installs tinc on Ubuntu.
 
-Tested on ubuntu 14.04 (Trusty)
+Tested on ubuntu 14.04 (Trusty), Fedora 24, CentOS7 and RHEL7.
 
 Only tested for L2 mesh setup.
 
