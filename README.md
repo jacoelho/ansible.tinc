@@ -50,12 +50,6 @@ host2:
       -----BEGIN RSA PRIVATE KEY-----
       -----END RSA PRIVATE KEY-----
 
-Dependencies
-------------
-
-python module netaddr is needed where playbook is going to run.
-
-
 Example Playbook
 ----------------
 

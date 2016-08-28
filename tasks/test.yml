@@ -34,9 +34,8 @@
     that:
       - item.subnet is defined and item.subnet|length > 0
       - item.subnet | ipaddr
-      - item.subnet | ipv4('host/prefix') | ipaddr('address')
-      - item.subnet | ipv4('host/prefix') | ipaddr('network')
-      - item.subnet | ipv4('host/prefix') | ipaddr('netmask')
+      - item.subnet | ipaddr('address')
+      - item.subnet.split('/')[1] | int
   with_items: tinc_vpn
 
 - name: tinc | check tinc_vpn list if public_key is defined

@@ -1,11 +1,10 @@
 # This file is managed by Ansible, all changes will be lost.
-{% set ipv4_host = item.subnet | ipv4('host/prefix') %}
 Name={{ item.name }}
 {% if 'address' in item %}
 Address={{ item.address }}
 {% endif %}
 Port={{ item.port | default('655') }}
 Compression={{ item.compression | default('0') }}
-Subnet={{ ipv4_host | ipaddr('address') }}/32
+Subnet={{ item.subnet }}
 
 {{ item.public_key }}
