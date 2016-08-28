@@ -3,7 +3,7 @@ Name={{ item.name }}
 Device=/dev/net/tun
 Mode=switch
 {% for server in tinc_vpn %}
-{% if item.vpn == server.vpn and item.name != server.name %}
+{% if item.vpn == server.vpn and item.name != server.name and server.address|d() %}
 ConnectTo={{ server.name }}
 {% endif %}
 {% endfor %}
