@@ -2,7 +2,8 @@
 
 - include: test.yml
 
-- include: apt.yml
+- include: install.yml
 
 - include: setup.yml
 
+- include: "init_{{ tinc_init_system }}.yml"

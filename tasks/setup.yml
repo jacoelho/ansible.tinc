@@ -1,4 +1,15 @@
 ---
+- name: tinc | create host directories
+  file:
+    path: "/etc/tinc/{{ item.vpn }}/hosts"
+    owner: root
+    group: root
+    state: directory
+    recurse: true
+  with_items: tinc_vpn
+  become: yes
+  become_method: sudo
+  notify: "{{ tinc_restart }}"
 
 - name: tinc | configure nets.boot
   template:
@@ -9,19 +20,8 @@
     group: root
   become: yes
   become_method: sudo
-  notify: restart tinc
-
-- name: tinc | create directories
-  file:
-    path: "/etc/tinc/{{ item.vpn }}/hosts"
-    owner: root
-    group: root
-    state: directory
-    recurse: true
-  with_items: tinc_vpn
-  become: yes
-  become_method: sudo
-  notify: restart tinc
+  notify: "{{ tinc_restart }}"
+  when: tinc_init_system != 'systemd'
 
 - name: tinc | copy rsa_key
   copy:
@@ -34,7 +34,7 @@
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
-  notify: restart tinc
+  notify: "{{ tinc_restart }}"
 
 - name: tinc | copy tinc.conf
   template:
@@ -47,7 +47,7 @@
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
-  notify: reload tinc
+  notify: "{{ tinc_reload }}"
 
 - name: tinc | configure hosts
   template:
@@ -59,7 +59,7 @@
   with_items: tinc_vpn
   become: yes
   become_method: sudo
-  notify: reload tinc
+  notify: "{{ tinc_reload }}"
 
 - name: tinc | configure tinc-up
   template:
@@ -72,7 +72,7 @@
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
-  notify: restart tinc
+  notify: "{{ tinc_restart }}"
 
 - name: tinc | configure tinc-down
   copy:
@@ -85,6 +85,6 @@
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
-  notify: restart tinc
+  notify: "{{ tinc_restart }}"
 
 - meta: flush_handlers

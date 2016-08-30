@@ -1,0 +1,19 @@
+---
+
+- name: tinc | install (Debian)
+  apt:
+    pkg: "tinc"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  become_method: sudo
+  when: ansible_os_family == "Debian"
+
+- name: tinc | install (RedHat)
+  yum:
+    pkg: "tinc"
+    state: present
+  become: yes
+  become_method: sudo
+  when: ansible_os_family == "RedHat"
