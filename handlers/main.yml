@@ -23,7 +23,7 @@
   service:
     name: "tinc@{{ item.vpn }}.service"
     state: reloaded
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   become: yes
   become_method: sudo
 
@@ -31,6 +31,6 @@
   service:
     name: "tinc@{{ item.vpn }}.service"
     state: restarted
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   become: yes
   become_method: sudo

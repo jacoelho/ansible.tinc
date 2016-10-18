@@ -16,13 +16,13 @@
   assert:
     that:
       - item.vpn is defined and item.vpn|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check tinc_vpn list if name is defined
   assert:
     that:
       - item.name is defined and item.name|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check tinc_vpn list if name is unique
   assert:
@@ -36,13 +36,13 @@
       - item.subnet | ipaddr
       - item.subnet | ipaddr('address')
       - item.subnet.split('/')[1] | int
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check tinc_vpn list if public_key is defined
   assert:
     that:
       - item.public_key is defined and item.public_key|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check if tinc_hostname in tinc_vpn
   assert:

@@ -5,6 +5,6 @@
     name: "tinc@{{ item.vpn }}.service"
     state: started
     enabled: yes
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   become: yes
   become_method: sudo
