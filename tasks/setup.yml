@@ -6,7 +6,7 @@
     group: root
     state: directory
     recurse: true
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   become: yes
   become_method: sudo
   notify: "{{ tinc_restart }}"
@@ -30,7 +30,7 @@
     mode: 0600
     owner: root
     group: root
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
@@ -43,7 +43,7 @@
     mode: 0644
     owner: root
     group: root
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
@@ -56,7 +56,7 @@
     owner: root
     group: root
     mode: 0644
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   become: yes
   become_method: sudo
   notify: "{{ tinc_reload }}"
@@ -68,7 +68,7 @@
     owner: root
     group: root
     mode: 0755
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
@@ -81,7 +81,7 @@
     owner: root
     group: root
     mode: 0755
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
   when: tinc_hostname == item.name
   become: yes
   become_method: sudo
