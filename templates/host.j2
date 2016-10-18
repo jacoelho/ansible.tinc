@@ -5,6 +5,10 @@ Address={{ item.address }}
 {% endif %}
 Port={{ item.port | default('655') }}
 Compression={{ item.compression | default('0') }}
+{% if 'subnet' in item %}
 Subnet={{ item.subnet }}
+{% else %}
+Subnet={{ item.vpn_address }}/32
+{% endif %}
 
 {{ item.public_key }}
