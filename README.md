@@ -45,7 +45,7 @@ host1:
 
 host2:
 
-    tinc_hostname: host1
+    tinc_hostname: host2
     tinc_rsa_key: |
       -----BEGIN RSA PRIVATE KEY-----
       -----END RSA PRIVATE KEY-----
