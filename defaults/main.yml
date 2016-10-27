@@ -3,6 +3,8 @@
 #tinc_hostname: redis3
 tinc_cipher: aes-256-cbc
 tinc_digest: SHA512
+tinc_mode: switch
+tinc_tunnel_server: no
 tinc_init_system: '{{ "systemd"
                    if (ansible_service_mgr|d() and
                        ansible_service_mgr == "systemd")
@@ -17,5 +19,8 @@ tinc_reload: "reload tinc - {{ tinc_init_system }}"
 #    address: <local ip where tinc should listen>
 #    port: 655
 #    compression: 0
-#    subnet: <tun ip address, for vpn access>
+#    vpn_interface:
+#      - address: <ip address>
+#        prefixlength: <prefixlen>
+#    subnet: <network address/prefixlen> # optional
 #    public_key: |

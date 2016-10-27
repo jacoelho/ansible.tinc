@@ -1,10 +1,29 @@
 # This file is managed by Ansible, all changes will be lost.
 Name={{ item.name }}
-{% if 'address' in item %}
+{% if tinc_hostgroup|d() and tinc_hostgroup != item.hostgroup %}
+{% if item.external_address|d() %}
+Address={{ item.external_address }}
+{% endif %}
+{% elif 'address' in item %}
 Address={{ item.address }}
 {% endif %}
 Port={{ item.port | default('655') }}
 Compression={{ item.compression | default('0') }}
+{% if 'subnet' in item %}
+{% if item.subnet is iterable and item.subnet is not string %}
+{% for subnet in item.subnet %}
+Subnet={{subnet}}
+{% endfor %}
+{% else %}
 Subnet={{ item.subnet }}
-
+{% endif %}
+{% else %}
+{% for i in item.vpn_interface %}
+{% if i.address | ipv4() %}
+Subnet={{ i.address }}/32
+{% else %}
+Subnet={{ i.address }}/128
+{% endif %}
+{% endfor %}
+{% endif %}
 {{ item.public_key }}
