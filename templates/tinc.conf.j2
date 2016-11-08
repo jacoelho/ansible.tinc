@@ -1,11 +1,23 @@
 # This file is managed by Ansible, all changes will be lost.
 Name={{ item.name }}
-{% if item.device|d() %}Device={ item.device }{% endif %}
-Mode=switch
+{% if item.device|d() %}
+Device={{ item.device }}
+{% endif %}
+Mode={{ tinc_mode }}
 {% for server in tinc_vpn %}
-{% if item.vpn == server.vpn and item.name != server.name and server.address|d() %}
+{% if item.vpn == server.vpn and item.name != server.name and (not item.hostgroup|d() or item.hostgroup == server.hostgroup) and server.address|d() %}
 ConnectTo={{ server.name }}
 {% endif %}
 {% endfor %}
-{% if tinc_cipher|d() and tinc_cipher %}Cipher={{ tinc_cipher }}{% endif %}
-{% if tinc_digest|d() and tinc_digest %}Digest={{ tinc_digest }}{% endif %}
+{% if item.also_connect_to|d() %}
+{% for server in item.also_connect_to %}
+ConnectTo={{ server }}
+{% endfor %}
+{% endif %}
+TunnelServer={{ tinc_tunnel_server }}
+{% if tinc_cipher|d() and tinc_cipher %}
+Cipher={{ tinc_cipher }}
+{% endif %}
+{% if tinc_digest|d() and tinc_digest %}
+Digest={{ tinc_digest }}
+{% endif %}

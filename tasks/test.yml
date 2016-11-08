@@ -1,8 +1,10 @@
 ---
 
-- name: tinc | check if tinc_hostname is defined
+- name: tinc | check if tinc_hostname is defined and valid
   assert:
-    that: tinc_hostname is defined and tinc_hostname|length > 0
+    that:
+      - tinc_hostname is defined and tinc_hostname|length > 0
+      - "'-' not in tinc_hostname"
 
 - name: tinc | check if tinc_rsa_key is defined
   assert:
@@ -16,33 +18,58 @@
   assert:
     that:
       - item.vpn is defined and item.vpn|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check tinc_vpn list if name is defined
   assert:
     that:
       - item.name is defined and item.name|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check tinc_vpn list if name is unique
   assert:
     that:
       - tinc_vpn|map(attribute='name')|list|length == tinc_vpn|map(attribute='name')|list|unique|length
 
-- name: tinc | check tinc_vpn list if subnet is defined and well formed
+- name: tinc | check tinc_vpn list if address is defined and well formed
   assert:
     that:
-      - item.subnet is defined and item.subnet|length > 0
-      - item.subnet | ipaddr
-      - item.subnet | ipaddr('address')
-      - item.subnet.split('/')[1] | int
-  with_items: tinc_vpn
+      - item.address is defined and item.address|length > 0
+      - item.address | ipaddr
+      - item.address | ipaddr('address')
+  with_items: "{{tinc_vpn}}"
+
+- name: tinc | check tinc_vpn list if subnet is well formed if defined
+  assert:
+    that:
+      - item.subnet is not defined or item.subnet|length > 0
+      - item.subnet is not defined or item.subnet | ipaddr
+      - item.subnet is not defined or item.subnet.split('/')[1] | int
+  with_items: "{{tinc_vpn}}"
+
+- name: tinc | check tinc_vpn.vpn_interface is defined and non-empty
+  assert:
+    that: item.vpn_interface is defined and item.vpn_interface|length > 0
+  with_items: "{{tinc_vpn}}"
+
+- name: tinc | check tinc_vpn list if vpn interface addresses and prefixes are defined and well formed
+  assert:
+    that:
+      - item.1.address is defined and item.1.address|length > 0
+      - item.1.address | ipaddr
+      - item.1.address | ipaddr('address')
+      - item.1.prefixlength is defined
+      - item.1.prefixlength | int
+      - item.1.prefixlength >= 0 and item.1.prefixlength <= 128
+  with_subelements:
+      - "{{tinc_vpn}}"
+      - vpn_interface
 
 - name: tinc | check tinc_vpn list if public_key is defined
   assert:
     that:
       - item.public_key is defined and item.public_key|length > 0
-  with_items: tinc_vpn
+  with_items: "{{tinc_vpn}}"
 
 - name: tinc | check if tinc_hostname in tinc_vpn
   assert:
